@@ -1,0 +1,16 @@
+El Problema:
+Eres analista de datos en una cadena de supermercados. Recibes un DataFrame que registra las transacciones diarias y contiene las columnas fecha, sucursal, categoria_producto y ventas_totales.
+Necesitas transformar estos datos transaccionales en una matriz bidimensional (tabla dinámica) para un reporte ejecutivo.
+
+Tu Misión:
+Escribe una función llamada crear_reporte_ventas_pivot(df) que realice lo siguiente:
+
+Utilice herramientas de Pandas para agrupar y pivotar los datos.
+
+Configure las filas para que sean el nombre de las sucursales y las columnas para que sean las distintas categorías de productos.
+
+Establezca como valores de la tabla dinámica la suma de las ventas_totales.
+
+Rellene cualquier combinación de sucursal y categoría que no haya registrado ventas con un 0 en lugar de dejar un valor nulo (NaN).
+
+Devuelva el DataFrame resultante (la tabla dinámica formateada).
