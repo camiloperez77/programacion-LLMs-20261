@@ -1,0 +1,18 @@
+Pregunta 3 (Scikit-Learn)
+El Problema:
+Una empresa de telecomunicaciones quiere descubrir qué factores influyen más en la fuga de clientes (churn). 
+Tienes una matriz de características numéricas X con el uso del servicio y un vector objetivo y (donde 1 significa que el cliente canceló y 0 que se quedó).
+El objetivo no es solo predecir, sino entender el negocio extrayendo la importancia intrínseca de cada variable evaluada por un ensamble de árboles.
+
+Tu Misión:
+Escribe una función llamada analizar_churn_gradient_boosting(X, y) que realice lo siguiente:
+
+Divida el dataset en datos de entrenamiento y prueba utilizando una proporción de 80% para entrenamiento y 20% para prueba usando sklearn.
+
+Instancie y entrene un clasificador GradientBoostingClassifier de sklearn (fijando una semilla para reproducibilidad, por ejemplo random_state=42).
+
+Realice predicciones sobre el conjunto de prueba utilizando el modelo entrenado.
+
+Extraiga los valores de importancia de cada característica (feature importances) calculados por el modelo.
+
+Devuelva una tupla con dos arrays de numpy: el vector de predicciones del conjunto de prueba y el vector con las importancias relativas de las características.
