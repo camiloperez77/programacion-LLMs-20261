@@ -1,0 +1,16 @@
+Pregunta 4 (Scikit-Learn)
+El Problema:
+Una startup de logística de última milla quiere identificar zonas de alta densidad donde se concentran sus entregas para instalar casilleros inteligentes. 
+Tienes un arreglo bidimensional X que contiene únicamente las coordenadas geográficas (latitud y longitud) de los puntos de entrega históricos. 
+Necesitas usar un algoritmo de agrupamiento basado en densidad que no requiera saber la cantidad de clústeres de antemano y que logre aislar las direcciones anómalas (ruido).
+
+Tu Misión:
+Escribe una función llamada agrupar_zonas_entrega_dbscan(X, epsilon, min_muestras) que realice lo siguiente:
+
+Escale los datos espaciales (coordenadas) utilizando StandardScaler de sklearn para estandarizarlos, un paso vital para que el cálculo de distancias funcione correctamente.
+
+Instancie un modelo DBSCAN de sklearn configurando los parámetros de radio (eps) con el valor de epsilon y los puntos mínimos (min_samples) con min_muestras.
+
+Ajuste el modelo DBSCAN utilizando únicamente los datos escalados.
+
+Devuelva un arreglo (array) de numpy con las etiquetas asignadas a cada punto, donde cada punto tiene su número de clúster correspondiente o -1 si el algoritmo lo consideró ruido/anomalía.
