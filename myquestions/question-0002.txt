@@ -1,0 +1,15 @@
+El Problema:
+Trabajas en el área de recursos humanos de una multinacional. Te envían un DataFrame con información de los empleados, pero existe una columna llamada
+info_contacto que agrupa varios datos en un solo texto desordenado con el formato "Nombre_Completo-Telefono-Departamento" (por ejemplo: "Juan Perez-5551234-Finanzas"). 
+Necesitas limpiar y reestructurar estos datos.
+
+Tu Misión:
+Escribe una función llamada procesar_info_contacto(df) que realice lo siguiente:
+
+Divida la columna de texto info_contacto utilizando el separador correspondiente para crear tres columnas nuevas e independientes: nombre, telefono y departamento.
+
+Elimine la columna original info_contacto del DataFrame.
+
+Filtre el DataFrame para conservar únicamente los registros de los empleados que pertenecen al departamento de "Ventas" o "IT".
+
+Devuelva el DataFrame procesado y filtrado.
