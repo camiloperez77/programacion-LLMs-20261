@@ -11,8 +11,8 @@ def generar_caso_de_uso_crear_reporte_ventas_pivot(n_filas=15):
         n_filas (int): Número de transacciones aleatorias a generar.
         
     Returns:
-        tuple: Un par (input_df, output_esperado_df)
-            - input_df: DataFrame con las transacciones crudas (argumento para la función).
+        tuple: Un par (input_dict, output_esperado_df)
+            - input_dict: Diccionario con los argumentos para la función (ej. {"df": df_input}).
             - output_esperado_df: DataFrame con la tabla dinámica correctamente calculada.
     """
     # ---------------------------------------------------------
@@ -50,16 +50,17 @@ def generar_caso_de_uso_crear_reporte_ventas_pivot(n_filas=15):
     )
     
     # ---------------------------------------------------------
-    # 3. RETORNAR EL PAR INPUT / OUTPUT
+    # 3. RETORNAR EL PAR INPUT / OUTPUT (CORREGIDO AQUÍ)
     # ---------------------------------------------------------
-    return df_input, df_output_esperado
+    # El validador exige que el input sea un diccionario de argumentos
+    return {"df": df_input}, df_output_esperado
 
 
 if __name__ == "__main__":
     # Generamos un caso
     entrada, salida_esperada = generar_caso_de_uso_crear_reporte_ventas_pivot()
-    print("--- INPUT PARA CASO DE USO ---\n")
+    print("--- INPUT PARA CASO DE USO (Diccionario) ---\n")
     print(entrada)
     print("\n")
     print("--- OUTPUT ESPERADO FUNCIÓN crear_reporte_ventas_pivot ---\n")
-    print(salida_esperada)  
+    print(salida_esperada)
