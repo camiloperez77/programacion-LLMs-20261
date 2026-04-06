@@ -12,8 +12,8 @@ def generar_caso_de_uso_agrupar_zonas_entrega_dbscan(n_puntos_densos=200, n_punt
         n_puntos_ruido (int): Cantidad de puntos anómalos esparcidos aleatoriamente (ruido).
         
     Returns:
-        tuple: Un par (input_args, output_esperado)
-            - input_args: Una tupla (X, epsilon, min_muestras) lista para desempaquetar.
+        tuple: Un par (input_dict, output_esperado)
+            - input_dict: Diccionario con los argumentos {"X": X, "epsilon": epsilon, "min_muestras": min_muestras}.
             - output_esperado: Un array de numpy con las etiquetas (clústeres y -1) correctas.
     """
     # ---------------------------------------------------------
@@ -44,11 +44,8 @@ def generar_caso_de_uso_agrupar_zonas_entrega_dbscan(n_puntos_densos=200, n_punt
     np.random.shuffle(X)
     
     # d. Definir los parámetros de DBSCAN para este caso de uso
-    epsilon_val = np.random.uniform(0.25, 0.4) # Valor razonable para datos escalados
-    min_muestras_val = np.random.randint(4, 7)
-    
-    # Empaquetamos los argumentos de entrada
-    input_args = (X, epsilon_val, min_muestras_val)
+    epsilon_val = float(np.random.uniform(0.25, 0.4)) # Valor razonable para datos escalados
+    min_muestras_val = int(np.random.randint(4, 7))
     
     # ---------------------------------------------------------
     # 2. GENERAR EL OUTPUT ESPERADO (La solución correcta)
@@ -66,17 +63,31 @@ def generar_caso_de_uso_agrupar_zonas_entrega_dbscan(n_puntos_densos=200, n_punt
     etiquetas_esperadas = dbscan.fit_predict(X_scaled)
     
     # ---------------------------------------------------------
-    # 3. RETORNAR EL PAR INPUT / OUTPUT
+    # 3. RETORNAR EL PAR INPUT / OUTPUT (CORREGIDO AQUÍ)
     # ---------------------------------------------------------
-    return input_args, etiquetas_esperadas
+    # Empaquetamos el input como un diccionario con las claves de los parámetros exactos
+    input_dict = {
+        "X": X,
+        "epsilon": epsilon_val,
+        "min_muestras": min_muestras_val
+    }
+    
+    return input_dict, etiquetas_esperadas
 
 if __name__ == "__main__":
     # Generamos un caso
-    inputs, etiquetas_esperadas = generar_caso_de_uso_agrupar_zonas_entrega_dbscan(150, 25)
-    X_in, eps_in, min_samples_in = inputs
+    inputs_dict, etiquetas_esperadas = generar_caso_de_uso_agrupar_zonas_entrega_dbscan(150, 25)
+    
+    # Extraemos del diccionario para imprimir
+    X_in = inputs_dict["X"]
+    eps_in = inputs_dict["epsilon"]
+    min_samples_in = inputs_dict["min_muestras"]
 
+    print("--- INPUT PARA CASO DE USO (Diccionario) ---")
+    print(f"Claves del diccionario: {list(inputs_dict.keys())}")
     print(f"Forma de X (Lat/Lon): {X_in.shape}")
     print(f"Epsilon generado: {eps_in:.3f}")
     print(f"Min_muestras generado: {min_samples_in}")
+    print("\n--- OUTPUT ESPERADO ---")
     print(f"Primeras 10 etiquetas esperadas: {etiquetas_esperadas[:10]}")
     print(f"¿Detectó ruido (-1)?: {-1 in etiquetas_esperadas}")
