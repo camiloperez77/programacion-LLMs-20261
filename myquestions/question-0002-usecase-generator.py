@@ -9,8 +9,8 @@ def generar_caso_de_uso_procesar_info_contacto(n_filas=15):
         n_filas (int): Número de registros de empleados aleatorios a generar.
         
     Returns:
-        tuple: Un par (input_df, output_esperado_df)
-            - input_df: DataFrame con la columna 'info_contacto' desordenada.
+        tuple: Un par (input_dict, output_esperado_df)
+            - input_dict: Diccionario con los argumentos para la función (ej. {"df": df_input}).
             - output_esperado_df: DataFrame con las columnas divididas y filtrado por Ventas/IT.
     """
     # ---------------------------------------------------------
@@ -63,14 +63,15 @@ def generar_caso_de_uso_procesar_info_contacto(n_filas=15):
     df_output_esperado = df_output_esperado[df_output_esperado['departamento'].isin(['Ventas', 'IT'])]
     
     # ---------------------------------------------------------
-    # 3. RETORNAR EL PAR INPUT / OUTPUT
+    # 3. RETORNAR EL PAR INPUT / OUTPUT (CORREGIDO AQUÍ)
     # ---------------------------------------------------------
-    return df_input, df_output_esperado
+    # Empaquetamos el DataFrame en un diccionario con la clave 'df'
+    return {"df": df_input}, df_output_esperado
 
 if __name__ == "__main__":
     # Generamos un caso
-    df_in, df_out_esperado = generar_caso_de_uso_procesar_info_contacto(20)
-    print("--- INPUT ---")
-    print(df_in)
+    entrada_dict, df_out_esperado = generar_caso_de_uso_procesar_info_contacto(20)
+    print("--- INPUT PARA CASO DE USO (Diccionario) ---")
+    print(entrada_dict)
     print("\n--- OUTPUT ESPERADO ---")
     print(df_out_esperado)
