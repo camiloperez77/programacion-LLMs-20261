@@ -12,8 +12,8 @@ def generar_caso_de_uso_analizar_churn_gradient_boosting(n_muestras=200, n_carac
         n_caracteristicas (int): Número de variables del servicio (columnas).
         
     Returns:
-        tuple: Un par (input_args, output_esperado)
-            - input_args: Una tupla (X, y) con las matrices numpy generadas.
+        tuple: Un par (input_dict, output_esperado)
+            - input_dict: Diccionario con los argumentos para la función {"X": X, "y": y}.
             - output_esperado: Una tupla (predicciones, importancias) calculadas correctamente.
     """
     # ---------------------------------------------------------
@@ -29,9 +29,6 @@ def generar_caso_de_uso_analizar_churn_gradient_boosting(n_muestras=200, n_carac
         n_classes=2,         # Clasificación binaria (Churn: 1 o 0)
         weights=[0.7, 0.3]   # Desbalance simulando que el 30% hace churn
     )
-    
-    # Empaquetamos el input como una tupla (X, y)
-    input_args = (X, y)
     
     # ---------------------------------------------------------
     # 2. GENERAR EL OUTPUT ESPERADO (La solución correcta)
@@ -55,18 +52,25 @@ def generar_caso_de_uso_analizar_churn_gradient_boosting(n_muestras=200, n_carac
     output_esperado = (predicciones_esperadas, importancias_esperadas)
     
     # ---------------------------------------------------------
-    # 3. RETORNAR EL PAR INPUT / OUTPUT
+    # 3. RETORNAR EL PAR INPUT / OUTPUT (CORREGIDO AQUÍ)
     # ---------------------------------------------------------
-    return input_args, output_esperado
+    # Empaquetamos el input como un diccionario con las claves de los parámetros exactos
+    return {"X": X, "y": y}, output_esperado
 
 
 if __name__ == "__main__":
     # Generamos un caso
-    inputs, output_esperado = generar_caso_de_uso_analizar_churn_gradient_boosting(150, 4)
-    X_input, y_input = inputs
+    inputs_dict, output_esperado = generar_caso_de_uso_analizar_churn_gradient_boosting(150, 4)
+    
+    # Extraemos para imprimir
+    X_input = inputs_dict["X"]
+    y_input = inputs_dict["y"]
     preds_esperadas, importancias_esperadas = output_esperado
 
+    print("--- INPUT PARA CASO DE USO (Diccionario) ---")
+    print(f"Claves del diccionario: {list(inputs_dict.keys())}")
     print(f"Forma de X_input: {X_input.shape}")
     print(f"Forma de y_input: {y_input.shape}")
+    print("\n--- OUTPUT ESPERADO ---")
     print(f"Primeras 5 predicciones esperadas: {preds_esperadas[:5]}")
     print(f"Importancia de variables esperada: {importancias_esperadas}")
