@@ -6,7 +6,7 @@ from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import StandardScaler
 from sklearn.neighbors import LocalOutlierFactor
 
-def detectar_outliers_lof(df, features=None, n_neighbors=20, contamination=0.05, test_size=0.2, random_state=42):
+def detectar_outliers_lof__manual(df, features=None, n_neighbors=20, contamination=0.05, test_size=0.2, random_state=42):
     """
     Detecta outliers con LocalOutlierFactor (LOF) tras imputar y escalar.
     Usa novelty=True para entrenar en train y predecir en test.
